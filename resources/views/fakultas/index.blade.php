@@ -161,12 +161,18 @@ License: You must have a valid license purchased only from themeforest(the above
 							<div class="row">
 								<div class="col-lg-12 bg-white" style="margin-top: -30px;">
 									<div class="kt-portlet__head">
-										<div class="kt-portlet__head-label py-3">
+										<div class="kt-portlet__head-label py-3 d-flex justify-content-between align-items-center">
 											<h3 class="kt-portlet__head-title">
-												Daftar Fakultas
+												Daftar {{ $title }}
 											</h3>
+											<button type="button" class="btn btn-success" onclick="window.location='{{ route('fakultas.create') }}'">Tambah</button>
 										</div>
 									</div>
+									@if(session()->get('success'))
+										<div class="alert alert-success" id="alert">
+											{{ session()->get('success') }}  
+										</div><br />
+									@endif
 									<div class="kt-section">
 										<div class="kt-section__content">
 											<table class="table table-striped">
@@ -183,7 +189,11 @@ License: You must have a valid license purchased only from themeforest(the above
 													<tr>
 														<th scope="row">{{ ++$no }}</th>
 														<td>{{ $fakultas->nama_fakultas }}</td>
-														<td><a href="{{ route('fakultas.edit', $fakultas->id)}}" class="btn btn-warning">Edit</a></td></td>
+														<td><div class="d-flex justify-content-center align-items-center"><a href="{{ route('fakultas.edit', $fakultas->id)}}" class="btn btn-warning">Edit</a> <form action="{{ route('fakultas.destroy', $fakultas->id)}}" method="post">
+															@csrf
+															@method('DELETE')
+															<button class="btn btn-danger mx-2" type="submit">Delete</button>
+														</form></div></td>
 													</tr>
 													@endforeach
 													
@@ -256,14 +266,20 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<!--begin::Page Vendors(used by this page) -->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-		<script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM" type="text/javascript"></script>
-		<script src="assets/plugins/custom/gmaps/gmaps.js" type="text/javascript"></script>
 
 		<!--end::Page Vendors -->
 
 		<!--begin::Page Scripts(used by this page) -->
 		<script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
-
+		<script>
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				setTimeout(function(){
+					var element = document.getElementById("alert");
+					element.parentNode.removeChild(element);
+  				element.classList.remove("alert.alert-success");
+				}, 3000 )
+			});
+		</script>
 		<!--end::Page Scripts -->
 	</body>
 

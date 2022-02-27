@@ -89,21 +89,12 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!-- begin:: Header -->
 					<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
-
-						<!-- begin:: Header Menu -->
-
-						<!-- Uncomment this to display the close button of the panel
-<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
--->						<!-- end:: Header Menu -->
-
-						<!-- begin:: Header Topbar -->
 						<div class="kt-header__topbar">
               <div class="kt_topbar_left">
                 <h3 class="kt-subheader__title my-0">@isset($title)
 										{{ $title }}
 									@endisset</h3>
 							</div>
-							<!--begin: User Bar -->
 							<div class="kt-header__topbar-item kt-header__topbar-item--user">
 								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
 									<div class="kt-header__topbar-user">
@@ -111,7 +102,7 @@ License: You must have a valid license purchased only from themeforest(the above
 										<span class="kt-header__topbar-username kt-hidden-mobile">{{Auth::user()->name}}</span>
 										<img class="kt-hidden" alt="Pic" src="{{ url('/') }}/assets/media/users/300_25.jpg" />
 
-										<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+	
 										<span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{ substr(Auth::user()->name,0,1) }}</span>
 									</div>
 								</div>
@@ -160,7 +151,28 @@ License: You must have a valid license purchased only from themeforest(the above
 							<!--Begin::Row-->
 							<div class="row">
 								<div class="col-lg-12 bg-white" style="margin-top: -30px;">
-									
+									<div class="kt-portlet__head">
+										<div class="kt-portlet__head-label py-3">
+											<h3 class="kt-portlet__head-title">
+												Form {{ $title }}
+											</h3>
+										</div>
+									</div>
+									<form class="kt-form" method="post" action="{{ route('fakultas.update', $fakultascase->id ) }}">
+										@csrf
+										<div class="kt-portlet__body">
+											<div class="form-group">
+												<label>Nama Fakultas</label>
+												<input type="text" class="form-control" name="nama_fakultas" aria-describedby="nama_fakultas" placeholder="Masukkan Nama Fakultas" value="{{ $fakultascase->nama_fakultas }}">
+											</div>
+										</div>
+										<div class="kt-portlet__foot pb-3">
+											<div class="kt-form__actions ">
+												<button type="submit" class="btn btn-primary">Update</button>
+												<button type="button" class="btn btn-secondary" onclick="window.location='{{ route('fakultas.index') }}'">Batal</button>
+											</div>
+										</div>
+									</form>
                 </div>
 							</div>
 						</div>

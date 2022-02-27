@@ -99,7 +99,9 @@ License: You must have a valid license purchased only from themeforest(the above
 						<!-- begin:: Header Topbar -->
 						<div class="kt-header__topbar">
               <div class="kt_topbar_left">
-                <h3 class="kt-subheader__title my-0">Dashboard</h3>
+                <h3 class="kt-subheader__title my-0">@isset($title)
+										{{ $title }}
+									@endisset</h3>
 							</div>
 							<!--begin: User Bar -->
 							<div class="kt-header__topbar-item kt-header__topbar-item--user">
@@ -149,70 +151,75 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!-- end:: Header -->
 					<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor py-0" id="kt_content">
-						<div class="row">
-							<div class="col-xl-8 col-lg-12 order-lg-3 order-xl-1">
 
-								<!--begin:: Widgets/Best Sellers-->
-								<div class="kt-portlet kt-portlet--height-fluid mx-4" style="margin-top: -35px;">
+						<!-- begin:: Content -->
+						<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid py-0">
+
+							<!--Begin::Dashboard 1-->
+
+							<!--Begin::Row-->
+							<div class="row">
+								<div class="col-lg-12 bg-white" style="margin-top: -30px;">
 									<div class="kt-portlet__head">
-										<div class="kt-portlet__head-label">
+										<div class="kt-portlet__head-label py-3 d-flex justify-content-between align-items-center">
 											<h3 class="kt-portlet__head-title">
-												Total Keseluruhan
+												Daftar {{ $title }}
 											</h3>
-										</div>
-										
-									</div>
-									<div class="kt-portlet__body">
-										<div class="tab-content">
-											<div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
-												<div class="kt-widget5">
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('mahasiswa.index') }}" class="kt-widget5__title">
-																	Mahasiswa
-																</a>
-																<h2 >
-																	{{ $cmhs }}
-																</h2>
-															</div>
-														</div>
-														
-													</div>
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('fakultas.index') }}" class="kt-widget5__title">
-																	Fakultas
-																</a>
-																<h2 >
-																	{{ $cfk }}
-																</h2>
-															</div>
-														</div>
-													</div>
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('programstudi.index') }}" class="kt-widget5__title">
-																	Progam Studi 
-																</a>
-																<h2 >
-																	{{ $cps }}
-																</h2>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
+											<button type="button" class="btn btn-success" onclick="window.location='{{ route('programstudi.create') }}'">Tambah</button>
 										</div>
 									</div>
-								</div>
+									@if(session()->get('success'))
+										<div class="alert alert-success" id="alert">
+											{{ session()->get('success') }}  
+										</div><br />
+									@endif
+
+									@if($errors->any())
+										<div class="alert alert-danger" id="alert">
+											{{$errors->first()}} 
+										</div><br />
+									@endif
+									<div class="kt-section">
+										<div class="kt-section__content">
+											<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>Nama Program Studi</th>
+                            <th>Nama Fakultas</th>
+														<th>Aksi</th>
+													</tr>
+												</thead>
+												<tbody>
+													@php $no = 0; @endphp
+													@foreach ($programstudi as $ps)
+													<tr>
+														<th scope="row">{{ ++$no }}</th>
+														<td>{{ $ps->nama_program_studi }}</td>
+                            <td>
+															@if( $ps->nama_fakultas == null || $ps->nama_fakultas == '')
+                                {{ '-' }}
+                              @else
+                              {{ $ps->nama_fakultas }}
+                              @endif
+														</td>
+														<td><div class="d-flex justify-content-center align-items-center"><a href="{{ route('programstudi.edit', $ps->id)}}" class="btn btn-warning">Edit</a> <form action="{{ route('programstudi.destroy', $ps->id)}}" method="post">
+															@csrf
+															@method('DELETE')
+															<button class="btn btn-danger mx-3" type="submit">Delete</button>
+														</form></div></td>
+													</tr>
+													@endforeach
+													
+												</tbody>
+											</table>
+										</div>
+									</div>
+                </div>
 							</div>
 						</div>
+
+						<!-- end:: Content -->
 					</div>
             @include('layouts.footer')
 				</div>
@@ -274,6 +281,19 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--begin::Page Vendors(used by this page) -->
 		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
 
+		<!--end::Page Vendors -->
+
+		<!--begin::Page Scripts(used by this page) -->
+		<script src="assets/js/pages/dashboard.js" type="text/javascript"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function(event) { 
+				setTimeout(function(){
+					var element = document.getElementById("alert");
+					element.parentNode.removeChild(element);
+  				element.classList.remove("alert.alert-success");
+				}, 3000 )
+			});
+		</script>
 		<!--end::Page Scripts -->
 	</body>
 

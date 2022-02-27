@@ -26,7 +26,8 @@ class FakultasController extends Controller
      */
     public function create()
     {
-        return view('fakultas.create');
+        $title = 'Tambah Fakultas';
+        return view('fakultas.create', compact('title'));
     }
 
     /**
@@ -37,7 +38,12 @@ class FakultasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_fakultas' => 'required|max:255',
+        ]);
+        $show = Fakultas::create($validatedData);
+   
+        return redirect('/fakultas')->with('success', 'Fakultas data is successfully saved');
     }
 
     /**
@@ -73,7 +79,12 @@ class FakultasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'nama_fakultas' => 'required|max:255',
+        ]);
+        Fakultas::whereId($id)->update($validatedData);
+
+        return redirect('/fakultas')->with('success', 'Fakultas data is successfully updated');
     }
 
     /**
@@ -84,6 +95,9 @@ class FakultasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $fakultascase = Fakultas::findOrFail($id);
+        $fakultascase->delete();
+
+        return redirect('/fakultas')->with('success', 'Fakultas data is successfully deleted');
     }
 }

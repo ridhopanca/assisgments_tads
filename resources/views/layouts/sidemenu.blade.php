@@ -18,9 +18,9 @@
         <div class="kt-menu__submenu "><span class="kt-menu__arrow"></span>
           <ul class="kt-menu__subnav">
             <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true"><span class="kt-menu__link"><span class="kt-menu__link-text">Master</span></span></li>
-            <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/inbox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Mahasiswa</span><span class="kt-menu__link-badge"></span></a></li>
+            <li class="kt-menu__item " aria-haspopup="true"><a href="{{ route('mahasiswa.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Mahasiswa</span><span class="kt-menu__link-badge"></span></a></li>
             <li class="kt-menu__item " aria-haspopup="true"><a href="{{ route('fakultas.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Fakultas</span><span class="kt-menu__link-badge"></span></a></li>
-            <li class="kt-menu__item " aria-haspopup="true"><a href="custom/apps/inbox.html" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Program Studi</span><span class="kt-menu__link-badge"></span></a></li>
+            <li class="kt-menu__item " aria-haspopup="true"><a href="{{ route('programstudi.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--line"><span></span></i><span class="kt-menu__link-text">Program Studi</span><span class="kt-menu__link-badge"></span></a></li>
           </ul>
         </div>
       </li>

@@ -24,7 +24,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
 			<div class="kt-header-mobile__logo">
 				<a href="{{ route('home') }}">
-					<img alt="Logo" src="assets/media/logos/logo-light.png" />
+					<img alt="Logo" src="{{ url('/') }}/assets/media/logos/logo-light.png" />
 				</a>
 			</div>
 			<div class="kt-header-mobile__toolbar">
@@ -49,7 +49,7 @@ License: You must have a valid license purchased only from themeforest(the above
 					<div class="kt-aside__brand kt-grid__iteDm " id="kt_aside_brand">
 						<div class="kt-aside__brand-logo">
 							<a href="{{ route('home') }}">
-								<img alt="Logo" src="assets/media/logos/logo-light.png" />
+								<img alt="Logo" src="{{ url('/') }}/assets/media/logos/logo-light.png" />
 							</a>
 						</div>
 						<div class="kt-aside__brand-tools">
@@ -89,36 +89,29 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!-- begin:: Header -->
 					<div id="kt_header" class="kt-header kt-grid__item  kt-header--fixed ">
-
-						<!-- begin:: Header Menu -->
-
-						<!-- Uncomment this to display the close button of the panel
-<button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
--->						<!-- end:: Header Menu -->
-
-						<!-- begin:: Header Topbar -->
 						<div class="kt-header__topbar">
               <div class="kt_topbar_left">
-                <h3 class="kt-subheader__title my-0">Dashboard</h3>
+                <h3 class="kt-subheader__title my-0">@isset($title)
+										{{ $title }}
+									@endisset</h3>
 							</div>
-							<!--begin: User Bar -->
 							<div class="kt-header__topbar-item kt-header__topbar-item--user">
 								<div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="0px,0px">
 									<div class="kt-header__topbar-user">
 										<span class="kt-header__topbar-welcome kt-hidden-mobile">Hi,</span>
 										<span class="kt-header__topbar-username kt-hidden-mobile">{{Auth::user()->name}}</span>
-										<img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+										<img class="kt-hidden" alt="Pic" src="{{ url('/') }}/assets/media/users/300_25.jpg" />
 
-										<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+	
 										<span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold">{{ substr(Auth::user()->name,0,1) }}</span>
 									</div>
 								</div>
 								<div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
 
 									<!--begin: Head -->
-									<div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image: url(assets/media/misc/bg-1.jpg)">
+									<div class="kt-user-card kt-user-card--skin-dark kt-notification-item-padding-x" style="background-image: url({{ url('/') }}/assets/media/misc/bg-1.jpg)">
 										<div class="kt-user-card__avatar">
-											<img class="kt-hidden" alt="Pic" src="assets/media/users/300_25.jpg" />
+											<img class="kt-hidden" alt="Pic" src="{{ url('/') }}/assets/media/users/300_25.jpg" />
 
 											<!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
 											<span class="kt-badge kt-badge--lg kt-badge--rounded kt-badge--bold kt-font-success">{{ substr(Auth::user()->name,0,1) }}</span>
@@ -149,70 +142,71 @@ License: You must have a valid license purchased only from themeforest(the above
 
 					<!-- end:: Header -->
 					<div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor py-0" id="kt_content">
-						<div class="row">
-							<div class="col-xl-8 col-lg-12 order-lg-3 order-xl-1">
 
-								<!--begin:: Widgets/Best Sellers-->
-								<div class="kt-portlet kt-portlet--height-fluid mx-4" style="margin-top: -35px;">
+						<!-- begin:: Content -->
+						<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid py-0">
+
+							<!--Begin::Dashboard 1-->
+
+							<!--Begin::Row-->
+							<div class="row">
+								<div class="col-lg-12 bg-white" style="margin-top: -30px;">
 									<div class="kt-portlet__head">
-										<div class="kt-portlet__head-label">
+										<div class="kt-portlet__head-label py-3">
 											<h3 class="kt-portlet__head-title">
-												Total Keseluruhan
+												Form {{ $title }}
 											</h3>
 										</div>
-										
 									</div>
-									<div class="kt-portlet__body">
-										<div class="tab-content">
-											<div class="tab-pane active" id="kt_widget5_tab1_content" aria-expanded="true">
-												<div class="kt-widget5">
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('mahasiswa.index') }}" class="kt-widget5__title">
-																	Mahasiswa
-																</a>
-																<h2 >
-																	{{ $cmhs }}
-																</h2>
-															</div>
-														</div>
-														
-													</div>
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('fakultas.index') }}" class="kt-widget5__title">
-																	Fakultas
-																</a>
-																<h2 >
-																	{{ $cfk }}
-																</h2>
-															</div>
-														</div>
-													</div>
-													<div class="kt-widget5__item">
-														<div class="kt-widget5__content d-flex">
-															
-															<div class="kt-widget5__section kt-widget5__section w-100 d-flex justify-content-between align-items-center">
-																<a href="{{ route('programstudi.index') }}" class="kt-widget5__title">
-																	Progam Studi 
-																</a>
-																<h2 >
-																	{{ $cps }}
-																</h2>
-															</div>
-														</div>
-													</div>
-												</div>
+                  @if($errors->any())
+										<div class="alert alert-danger" id="alert">
+											{{$errors->first()}} 
+										</div><br />
+									@endif
+									<form class="kt-form" method="post" action="{{ route('mahasiswa.store')}}">
+										@csrf
+										<div class="kt-portlet__body">
+                      <div class="form-group">
+												<label>Nama</label>
+												<input type="text" class="form-control" name="nama" aria-describedby="nama" placeholder="Masukkan Nama" >
+											</div>
+                      <div class="form-group">
+												<label>Alamat</label>
+												<input type="text" class="form-control" name="alamat" aria-describedby="alamat" placeholder="Masukkan Alamat" >
+											</div>
+                      <div class="form-group">
+												<label>No Telp</label>
+												<input type="text" class="form-control" name="no_telp" aria-describedby="no_telp" placeholder="Masukkan No Telp" >
+											</div>
+                      <div class="form-group">
+                        <label for="fakultas_id">Nama Fakultas</label>
+                        <select class="form-control" id="fakultas_id" name="fakultas_id">
+                          <option value="">Pilih salah satu</option>
+                          @foreach ($fakultas as $fk)
+                          <option value="{{ $fk->id }}">{{ $fk->nama_fakultas }}</option>
+                          @endforeach
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="fakultas_id">Nama Program Studi</label>
+                        <select class="form-control" id="program_studi_id" name="program_studi_id">
+                          
+                        </select>
+                      </div>
+											
+										</div>
+										<div class="kt-portlet__foot pb-3">
+											<div class="kt-form__actions ">
+												<button type="submit" class="btn btn-primary">Simpan</button>
+												<button type="button" class="btn btn-secondary" onclick="window.location='{{ route('mahasiswa.index') }}'">Batal</button>
 											</div>
 										</div>
-									</div>
-								</div>
+									</form>
+                </div>
 							</div>
 						</div>
+
+						<!-- end:: Content -->
 					</div>
             @include('layouts.footer')
 				</div>
@@ -266,14 +260,44 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!-- end::Global Config -->
 
 		<!--begin::Global Theme Bundle(used by all pages) -->
-		<script src="assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
-		<script src="assets/js/scripts.bundle.js" type="text/javascript"></script>
+		<script src="{{ url('/') }}/assets/plugins/global/plugins.bundle.js" type="text/javascript"></script>
+		<script src="{{ url('/') }}/assets/js/scripts.bundle.js" type="text/javascript"></script>
 
 		<!--end::Global Theme Bundle -->
-
-		<!--begin::Page Vendors(used by this page) -->
-		<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js" type="text/javascript"></script>
-
+    <script>
+    $( document ).ready(function() {
+      setTimeout(function(){
+					var element = document.getElementById("alert");
+					element.parentNode.removeChild(element);
+  				element.classList.remove("alert.alert-success");
+				}, 3000 )
+      var id = "";
+      loadProgramStudi(id);
+    });
+    function loadProgramStudi(id){
+      if(id == ''){
+        var template = '';
+          template += '<option value="">Pilih fakultas terleih dahulu</option>';
+        $('#program_studi_id').html(template);
+      }else{
+      $.ajax({
+        type: "get",
+        url: `/programstudi/${id}`,
+        }).done(function( data ) {
+          var template = '';
+          template += '<option value="">Pilih salah satu</option>';
+          for( var i = 0; i < data.length;i++){
+            template += `<option value="${data[i].id}" >${data[i].nama_program_studi}</option>`;
+          }
+          $('#program_studi_id').html(template);
+      });
+      }
+    }
+    $('#fakultas_id').change(function(){
+      var id = $(this).val();
+      loadProgramStudi(id);
+    })
+    </script>
 		<!--end::Page Scripts -->
 	</body>
 

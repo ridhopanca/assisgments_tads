@@ -13,7 +13,7 @@ class ProgramStudiSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('program_studi')->insert([
+        DB::table('program_studis')->insert([
             'fakultas_id' => 1,
             'nama_program_studi' => 'Teknik Informatika',
         ]);   
